@@ -6,70 +6,114 @@ const galleryItems = [
         alt: "Tulips",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2025/03/21/21/22/roche-9485693_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2025/03/21/21/22/roche-9485693_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2025/03/21/21/22/roche-9485693_1280.jpg",
+        alt: "Stone",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2025/02/17/16/04/dog-9413394_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2025/02/17/16/04/dog-9413394_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2025/02/17/16/04/dog-9413394_1280.jpg",
+        alt: "Dog",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2019/04/10/23/51/animal-4118585_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2019/04/10/23/51/animal-4118585_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2019/04/10/23/51/animal-4118585_1280.jpg",
+        alt: "Dog",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2020/04/24/15/34/namibia-5087365_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2020/04/24/15/34/namibia-5087365_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2020/04/24/15/34/namibia-5087365_1280.jpg",
+        alt: "Dessert",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2021/11/11/09/58/desert-6785856_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2021/11/11/09/58/desert-6785856_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2021/11/11/09/58/desert-6785856_1280.jpg",
+        alt: "Dunes",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2019/01/02/18/38/namibia-3909397_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2019/01/02/18/38/namibia-3909397_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2019/01/02/18/38/namibia-3909397_1280.jpg",
+        alt: "Sea",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2020/04/08/06/57/zebras-5015976_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2020/04/08/06/57/zebras-5015976_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2020/04/08/06/57/zebras-5015976_1280.jpg",
+        alt: "Zebra",
     },
     {
-        href: "s",
-        src: "",
-        source: "",
-        alt: "",
+        href: "https://cdn.pixabay.com/photo/2016/01/30/17/58/zebra-1170177_1280.jpg",
+        src: "https://cdn.pixabay.com/photo/2016/01/30/17/58/zebra-1170177_1280.jpg",
+        source: "https://cdn.pixabay.com/photo/2016/01/30/17/58/zebra-1170177_1280.jpg",
+        alt: "Animals",
     },
 ];
 
-//  const galleryItemData = galleryItems.map(galleryItem => {
-//     const galleryItemHref = galleryItem.href;
-//     const galleryItemSrc = galleryItem.src;
-//     const galleryItemSource = galleryItem.Source;
-//     const galleryItemAlt = galleryItem.Alt;
-// })
+const galleryItemsUl = document.createElement("ul");
+const galleryFinal = galleryItems.map(galleryItem => {
+    return `
+        <li class="gallery__item">
+            <a class="gallery__link" href="${galleryItem.href}">
+                <img class="gallery__image" src="${galleryItem.src}" data-source="${galleryItem.source}" alt="${galleryItem.alt}" />
+            </a>
+        </li>
+    `;
+}).join("");
 
-const galleryItemHref = galleryItems.map(galleryItem => galleryItem.href);
-const galleryItemSrc = galleryItems.map(galleryItem => galleryItem.src);
-const galleryItemSource = galleryItems.map(galleryItem => galleryItem.source);
-const galleryItemAlt = galleryItems.map(galleryItem => galleryItem.alt);
+const galleryLinkElement = document.querySelector(".gallery__link");
 
-console.log(galleryItemHref);
-console.log(galleryItemSrc);
-console.log(galleryItemSource);
-console.log(galleryItemAlt);
+const modal = document.querySelector("[data-modal]");
+const closeButton = document.querySelector("[data-modal-close]");
+const backdrop = document.querySelector("[data-backdrop]");
 
-console.log("hi")
+galleryLinkElement.addEventListener("click", (event) => {
+    modal.classList.remove("is-hidden");
+    backdrop.classList.add("active");
+});
+closeButton.addEventListener("click", () => {
+    modal.classList.add("is-hidden");
+    backdrop.classList.remove("active");
+});
+
+const modalHomework = galleryItems.map(galleryItem => {
+    return `
+
+<div data-backdrop class="footer-backdrop">
+    <div data-modal class="footer-modal">
+        <button data-modal-close type="button" class="footer-modal__button"><img class="modal__cross" src="https://static-00.iconduck.com/assets.00/cross-mark-emoji-512x512-9lmr75ja.png" alt="cross"></button>
+        <img src="${galleryItem.src}" alt="${galleryItem.alt}" class="gallery__modal-img">
+    </div>
+</div>`
+}).join("");
+
+document.body.append(modalHomework)
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const ul = document.querySelector("ul");
+    ul.style.listStyle = "none";
+    ul.style.display = "flex";
+    ul.style.flexWrap = "wrap";
+    ul.style.gap = "50px";
+    ul.style.justifyContent = "center";
+
+    const images = document.querySelectorAll("img");
+    images.forEach(img => {
+        img.style.width = "400px";
+        img.style.height = "300px";
+    });
+});
+
+
+
+galleryItemsUl.innerHTML = galleryFinal;
+
+document.body.append(galleryItemsUl);

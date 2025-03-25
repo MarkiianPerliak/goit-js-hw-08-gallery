@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./app.js">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <script>
@@ -75,14 +75,60 @@ const galleryFinal = galleryItems.map(galleryItem => {
             </a>
         </li>
     `;
-}).join();
+}).join("");
 
 galleryItemsUl.innerHTML = galleryFinal;
 
 document.body.append(galleryItemsUl);
 
-galleryItemsUl.style.display = "flex";
-galleryItemsUl.style.flexWrap = "wrap";
+const modalHomework = galleryItems.map(galleryItem => {
+    return `
+
+<div data-backdrop class="backdrop">
+    <div data-modal class="modal">
+        <button data-modal-close type="button" class="modal__button"><img class="modal__cross" src="https://static-00.iconduck.com/assets.00/cross-mark-emoji-512x512-9lmr75ja.png" alt="cross"></button>
+        <img src="${galleryItem.src}" alt="${galleryItem.alt}" class="gallery__modal-img">
+    </div>
+</div>`
+}).join("");
+
+document.body.append(modalHomework)
+
+const galleryLinkElement = document.querySelector(".gallery__link");
+
+const modal = document.querySelector("[data-modal]");
+const closeButton = document.querySelector("[data-modal-close]");
+const backdrop = document.querySelector("[data-backdrop]");
+
+galleryLinkElement.addEventListener("click", (event) => {
+    modal.classList.remove("is-hidden");
+    backdrop.classList.add("active");
+});
+
+closeButton.addEventListener("click", (event) => {
+    modal.classList.add("is-hidden");
+    backdrop.classList.remove("active");
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const ul = document.querySelector("ul");
+    ul.style.listStyle = "none";
+    ul.style.display = "flex";
+    ul.style.flexWrap = "wrap";
+    ul.style.gap = "50px";
+    ul.style.justifyContent = "center";
+
+    const images = document.querySelectorAll("img");
+    images.forEach(img => {
+        img.style.width = "400px";
+        img.style.height = "300px";
+    });
+});
+
+
+
 
 </script>
 </body>

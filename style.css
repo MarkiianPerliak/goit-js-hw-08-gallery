@@ -1,0 +1,53 @@
+.is-hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 250ms ease, transform 250ms ease, visibility 0s linear 250ms;
+}
+
+.backdrop {
+    background: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 250ms ease, visibility 0s linear 250ms;
+}
+
+.backdrop.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 250ms ease;
+}
+
+.modal {
+    padding: 83px 137px 138px 138px;
+    border-radius: 20px;
+    background: #FFF;
+    transform: scale(1);
+    opacity: 1;
+    transition: opacity 250ms ease, transform 250ms ease;
+}
+
+
+
+.modal__cross {
+    width: 15px;
+height: 15px;
+flex-shrink: 0;
+position: absolute;
+top: 30px;
+right: 30px;
+}
+
+.modal__button {
+    background: transparent;
+    border: none;
+}
